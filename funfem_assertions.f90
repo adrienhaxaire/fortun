@@ -144,7 +144,7 @@ contains
   end function assert_real_gt
 
 
-  !-- Assertions on greater than
+  !-- Assertions on greater or equal
   !---------------------------------------------------------------- assert_int_ge
   pure logical function assert_int_ge(a,b) result(res)
     integer, intent(IN) :: a, b
