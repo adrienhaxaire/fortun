@@ -9,13 +9,25 @@
 
 program fortun
 
+  use fortun_generate, only : generate
+
+  implicit none 
+
   !-- compilation of new tests
   ! check for added/modified tests with timestamp difference
   ! check dependencies
   ! compile them
+
+  !-- generation of test executable
+  call generate()
+
   ! link to the main test executable
 
+
+
   !-- run all tests
+  ! call system("./fortun_test", stat)    !< only for linux now, should provide a better way
+
 
   !-- display results
 

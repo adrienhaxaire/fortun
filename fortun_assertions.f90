@@ -1,4 +1,4 @@
-module assertions
+module fortun_assertions
 
 implicit none 
 
@@ -170,4 +170,4 @@ contains
 
   end function assert_real_ge
 
-end module assertions
+end module fortun_assertions
