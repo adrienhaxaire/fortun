@@ -9,10 +9,14 @@
 
 program fortun
 
-  
+  !-- compilation of new tests
+  ! check for added/modified tests with timestamp difference
+  ! check dependencies
+  ! compile them
+  ! link to the main test executable
 
+  !-- run all tests
 
-
-
+  !-- display results
 
 end program fortun
