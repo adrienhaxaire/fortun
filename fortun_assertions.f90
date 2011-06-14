@@ -4,7 +4,7 @@ implicit none
 
 private
 
-public :: assert_eq !, assert_lt, assert_gt
+public :: assert_eq, assert_lt, assert_gt, assert_le, assert_ge
 
 interface assert_eq
    module procedure assert_int_eq, assert_real_eq, assert_bool_eq
@@ -33,12 +33,14 @@ contains
   !-- Assertions on equality
   !---------------------------------------------------------------- assert_int_eq
   pure logical function assert_int_eq(a,b) result(res)
+    implicit none 
     integer, intent(IN) :: a, b
     res = a .eq. b
   end function assert_int_eq
 
   !--------------------------------------------------------------- assert_bool_eq
   pure logical function assert_bool_eq(a,b) result(res)
+    implicit none 
     logical, intent(IN) :: a, b
     res = a .eqv. b
   end function assert_bool_eq
@@ -46,6 +48,7 @@ contains
   !--------------------------------------------------------------- assert_real_eq
   !> default tolerance is 1.e-10 
   pure logical function assert_real_eq(a,b,tolerance) result(res)
+    implicit none 
     real, intent(IN) :: a, b
     real, intent(IN), optional :: tolerance 
 
@@ -66,6 +69,7 @@ contains
   !-- Assertions on less than
   !---------------------------------------------------------------- assert_int_lt
   pure logical function assert_int_lt(a,b) result(res)
+    implicit none 
     integer, intent(IN) :: a, b
     res = a .lt. b
   end function assert_int_lt
@@ -73,6 +77,7 @@ contains
   !--------------------------------------------------------------- assert_real_lt
   !> default tolerance is 1.e-10 
   pure logical function assert_real_lt(a,b,tolerance) result(res)
+    implicit none 
     real, intent(IN) :: a, b
     real, intent(IN), optional :: tolerance 
 
@@ -93,6 +98,7 @@ contains
   !-- Assertions on less or equal
   !---------------------------------------------------------------- assert_int_le
   pure logical function assert_int_le(a,b) result(res)
+    implicit none 
     integer, intent(IN) :: a, b
     res = a .le. b
   end function assert_int_le
@@ -100,6 +106,7 @@ contains
   !--------------------------------------------------------------- assert_real_le
   !> default tolerance is 1.e-10 
   pure logical function assert_real_le(a,b,tolerance) result(res)
+    implicit none 
     real, intent(IN) :: a, b
     real, intent(IN), optional :: tolerance 
 
@@ -120,6 +127,7 @@ contains
   !-- Assertions on greater than
   !---------------------------------------------------------------- assert_int_gt
   pure logical function assert_int_gt(a,b) result(res)
+    implicit none 
     integer, intent(IN) :: a, b
     res = a .gt. b
   end function assert_int_gt
@@ -127,6 +135,7 @@ contains
   !--------------------------------------------------------------- assert_real_gt
   !> default tolerance is 1.e-10 
   pure logical function assert_real_gt(a,b,tolerance) result(res)
+    implicit none 
     real, intent(IN) :: a, b
     real, intent(IN), optional :: tolerance 
 
@@ -147,6 +156,7 @@ contains
   !-- Assertions on greater or equal
   !---------------------------------------------------------------- assert_int_ge
   pure logical function assert_int_ge(a,b) result(res)
+    implicit none 
     integer, intent(IN) :: a, b
     res = a .ge. b
   end function assert_int_ge
@@ -154,6 +164,7 @@ contains
   !--------------------------------------------------------------- assert_real_ge
   !> default tolerance is 1.e-10 
   pure logical function assert_real_ge(a,b,tolerance) result(res)
+    implicit none 
     real, intent(IN) :: a, b
     real, intent(IN), optional :: tolerance 
 
