@@ -3,7 +3,6 @@ FC := gfortran
 
 FF := -Wall -g 
 
-
 OBJ := fortun_generate.o
 
 
