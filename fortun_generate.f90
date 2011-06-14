@@ -13,11 +13,12 @@ module fortun_generate
 
 contains
 
+  !--------------------------------------------------------------------- generate
   subroutine generate()
+
     implicit none 
   
     call find_tests()
-
 
   end subroutine generate
 
@@ -25,6 +26,7 @@ contains
   !------------------------------------------------------------------- find_tests
   !> find the files which have a name starting with 'test_'
   subroutine find_tests()
+
     implicit none 
 
     ! first and last columns of a 'ls -l' command
@@ -63,6 +65,7 @@ contains
 
   !-------------------------------------------------------------- number_of_lines
   !> counts the number of lines in a file
+  !! inspired from FortranWiki
   integer function number_of_lines(input_file) result(lines)
     
     use iso_fortran_env, only : iostat_end
@@ -70,6 +73,7 @@ contains
     implicit none 
 
     character(len=*), intent(IN) :: input_file
+
     integer, parameter :: io = 15
     integer :: stat
     character(len=100) :: buffer
@@ -77,8 +81,8 @@ contains
     lines = 0
     open(io, file=trim(input_file), form="formatted")
     do  
-       read(io, *, iostat=stat) buffer
-       if(stat == iostat_end) exit
+       read(io, fmt=*, iostat=stat) buffer
+       if (stat .eq. iostat_end) exit
        lines = lines + 1
     end do
     close(io)
