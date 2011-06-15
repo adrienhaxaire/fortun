@@ -18,20 +18,27 @@ contains
 
     implicit none 
   
-    call find_tests()
+    character(1024), dimension(:), allocatable :: test_files
+
+    call find_tests(test_files)
 
   end subroutine generate
 
 
   !------------------------------------------------------------------- find_tests
   !> find the files which have a name starting with 'test_'
-  subroutine find_tests()
+  !! parses subdirectories as well
+  subroutine find_tests(test_files)
+
+    use fortun_utils, only : extend
 
     implicit none 
 
     ! first and last columns of a 'ls -l' command
     integer, parameter :: io = 11
 
+    character(256), dimension(:) :: test_files
+    
     character(1), dimension(:), allocatable :: first_column
     character(256), dimension(:), allocatable ::  last_column
     character(len=256), dimension(8) :: not_used
@@ -88,6 +95,9 @@ contains
     close(io)
 
   end function number_of_lines
+
+  
+
 
 
 end module fortun_generate
