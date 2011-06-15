@@ -27,24 +27,28 @@ contains
     integer, intent(IN) :: extent
 
     character(len=CHAR_LENGTH), dimension(:), allocatable :: tmp
-    integer :: length
+    integer :: length, error
     
     if (.not.allocated(array)) then
-       allocate(array(extent))
+       allocate(array(extent), stat=error)
+       call check_allocation(error,"'array' in extend_char")
        array = ""
     else
        length = size(array)
 
-       allocate(tmp(length))
+       allocate(tmp(length), stat=error)
+       call check_allocation(error,"'tmp' in extend_char")
        tmp = array
 
-       deallocate(array)
-       allocate(array(length+extent))
+       deallocate(array, stat=error)
+       call check_deallocation(error,"'array' in extend_char")
+
+       allocate(array(length+extent), stat=error)
+       call check_allocation(error,"'array' in extend_char")
 
        array(1:length) = tmp
        array(length+1:) = ""
 
-       deallocate(tmp)
     end if
 
   end subroutine extend_char
@@ -111,7 +115,7 @@ contains
     character(1024) :: error_msg 
 
     if (stat .ne. 0) then
-       error_msg = "Error: "// trim(sub) //" of " // trim(array_name) // " failed."
+       error_msg = "Error: " // trim(sub) // " of " // trim(array_name) // " failed."
        print *, trim(error_msg)
        stop
     end if

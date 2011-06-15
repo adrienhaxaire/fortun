@@ -61,10 +61,10 @@ contains
     lines = number_of_lines("list.txt") - 1  
 
     allocate(first_column(lines), stat=error) 
-    call check_allocation(error, "first_column")
+    call check_allocation(error, "first_column in find_tests")
 
     allocate(last_column(lines), stat=error) 
-    call check_allocation(error, "last_column")
+    call check_allocation(error, "last_column in find_tests")
 
     open(io, file="list.txt", form='formatted')
     read(io,*)  ! skip the header 
