@@ -7,7 +7,7 @@ module fortun_utils
   public :: extend
   public :: CHAR_LENGTH
   public :: number_of_lines
-  public :: check_allocation
+  public :: check_allocation, check_deallocation
 
   integer, parameter :: CHAR_LENGTH = 256
 
@@ -75,7 +75,7 @@ contains
 
   end function number_of_lines
 
-  !------------------------------------------------------------- assert_allocated
+  !------------------------------------------------------------- check_allocation
   subroutine check_allocation(stat, array_name)
 
     implicit none 
@@ -83,14 +83,38 @@ contains
     integer, intent(IN) :: stat
     character(len=*), intent(IN) :: array_name
 
+    call stop_alloc(stat, array_name)
+
+  end subroutine check_allocation
+
+  !----------------------------------------------------------- check_deallocation
+  subroutine check_deallocation(stat, array_name)
+
+    implicit none 
+
+    integer, intent(IN) :: stat
+    character(len=*), intent(IN) :: array_name
+
+    call stop_alloc(stat, array_name)
+
+  end subroutine check_deallocation
+
+  !------------------------------------------------------------------- stop_alloc
+  !> helper subroutine for check_[de]alloc
+  subroutine stop_alloc(stat, array_name)
+
+    integer, intent(IN) :: stat
+    character(len=*), intent(IN) :: array_name
+
     character(1024) :: error_msg 
 
     if (stat .ne. 0) then
-       error_msg = "Error: allocation of " // trim(array_name) // " failed."
+       error_msg = "Error: deallocation of " // trim(array_name) // " failed."
        print *, trim(error_msg)
        stop
     end if
 
-  end subroutine check_allocation
+  end subroutine stop_alloc
+
 
 end module fortun_utils
