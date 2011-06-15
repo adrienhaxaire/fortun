@@ -31,28 +31,26 @@ contains
   !> find the files which have a name starting with 'test_'
   recursive subroutine find_tests(directory, test_files)
 
-    use fortun_utils, only : extend, CHAR_LENGTH, number_of_lines
+    use fortun_utils, only : extend, CHAR_LENGTH, number_of_lines, check_allocation
 
     implicit none 
 
     integer, parameter :: io = 11
     character(5), parameter :: test_prefix="test_"
-    integer, parameter :: NB_LS_COLUMNS = 8
-  
+    integer, parameter :: LS_COLUMNS = 8, UNUSED_COLUMNS = 6
+    
     character(len=*), intent(IN) :: directory
     character(len=*), dimension(:), allocatable, intent(INOUT) :: test_files
 
     character(CHAR_LENGTH) :: cmd
     character(1), dimension(:), allocatable :: first_column
     character(CHAR_LENGTH), dimension(:), allocatable ::  last_column
-    character(CHAR_LENGTH), dimension(NB_LS_COLUMNS) :: not_used
+    character(CHAR_LENGTH), dimension(UNUSED_COLUMNS) :: not_used
     character(len(test_prefix)) :: file_prefix
-    integer :: i, line, lines
+    integer :: i, line, lines, error
 
     if (directory .eq. "") then
        return
-    else if (directory .eq. ".") then
-       cmd = "ls -l > list.txt"
     else 
        cmd = "ls -l "// trim(directory) //"> list.txt"
     end if
@@ -61,12 +59,18 @@ contains
 
     ! number of lines minus the header "total <nb>" = nb of files/directories
     lines = number_of_lines("list.txt") - 1  
-    allocate(first_column(lines), last_column(lines))    ! todo: handle alloc errors
+
+    allocate(first_column(lines), stat=error) 
+    call check_allocation(error, "first_column")
+
+    allocate(last_column(lines), stat=error) 
+    call check_allocation(error, "last_column")
 
     open(io, file="list.txt", form='formatted')
     read(io,*)  ! skip the header 
     do line=1,lines
-       read(io,*) first_column(line), (not_used(i), i=1,6), last_column(line)
+       read(io,*) first_column(line), (not_used(i), i=1,UNUSED_COLUMNS), &
+            last_column(line)
     end do
     close(io)
 
@@ -84,7 +88,6 @@ contains
        end if
     end do
     
-
   end subroutine find_tests
 
 end module fortun_generate

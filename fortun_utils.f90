@@ -7,6 +7,7 @@ module fortun_utils
   public :: extend
   public :: CHAR_LENGTH
   public :: number_of_lines
+  public :: check_allocation
 
   integer, parameter :: CHAR_LENGTH = 256
 
@@ -74,5 +75,22 @@ contains
 
   end function number_of_lines
 
+  !------------------------------------------------------------- assert_allocated
+  subroutine check_allocation(stat, array_name)
+
+    implicit none 
+
+    integer, intent(IN) :: stat
+    character(len=*), intent(IN) :: array_name
+
+    character(1024) :: error_msg 
+
+    if (stat .ne. 0) then
+       error_msg = "Error: allocation of " // trim(array_name) // " failed."
+       print *, trim(error_msg)
+       stop
+    end if
+
+  end subroutine check_allocation
 
 end module fortun_utils
