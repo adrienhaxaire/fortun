@@ -83,7 +83,7 @@ contains
     integer, intent(IN) :: stat
     character(len=*), intent(IN) :: array_name
 
-    call stop_alloc(stat, array_name)
+    call stop_alloc(stat, array_name, "Allocation")
 
   end subroutine check_allocation
 
@@ -95,21 +95,23 @@ contains
     integer, intent(IN) :: stat
     character(len=*), intent(IN) :: array_name
 
-    call stop_alloc(stat, array_name)
+    call stop_alloc(stat, array_name, "Deallocation")
 
   end subroutine check_deallocation
 
   !------------------------------------------------------------------- stop_alloc
   !> helper subroutine for check_[de]alloc
-  subroutine stop_alloc(stat, array_name)
+  subroutine stop_alloc(stat, array_name, sub)
 
     integer, intent(IN) :: stat
     character(len=*), intent(IN) :: array_name
+    character(len=*), intent(IN) :: sub
+
 
     character(1024) :: error_msg 
 
     if (stat .ne. 0) then
-       error_msg = "Error: deallocation of " // trim(array_name) // " failed."
+       error_msg = "Error: "// trim(sub) //" of " // trim(array_name) // " failed."
        print *, trim(error_msg)
        stop
     end if
