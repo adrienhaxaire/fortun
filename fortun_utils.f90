@@ -6,6 +6,7 @@ module fortun_utils
 
   public :: extend
   public :: CHAR_LENGTH
+  public :: number_of_lines
 
   integer, parameter :: CHAR_LENGTH = 256
 
@@ -47,6 +48,31 @@ contains
 
   end subroutine extend_char
 
+  !-------------------------------------------------------------- number_of_lines
+  !> counts the number of lines in a file
+  !! inspired from FortranWiki
+  integer function number_of_lines(input_file) result(lines)
+    
+    use iso_fortran_env, only : iostat_end
+
+    implicit none 
+
+    character(len=*), intent(IN) :: input_file
+
+    integer, parameter :: io = 15
+    integer :: stat
+    character(len=100) :: buffer
+        
+    lines = 0
+    open(io, file=trim(input_file), form="formatted")
+    do  
+       read(io, fmt=*, iostat=stat) buffer
+       if (stat .eq. iostat_end) exit
+       lines = lines + 1
+    end do
+    close(io)
+
+  end function number_of_lines
 
 
 end module fortun_utils

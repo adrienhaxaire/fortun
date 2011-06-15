@@ -24,8 +24,6 @@ contains
 
     call find_tests(".",test_files)
 
-    print *, trim(test_files(1))
-
   end subroutine generate
 
 
@@ -33,7 +31,7 @@ contains
   !> find the files which have a name starting with 'test_'
   recursive subroutine find_tests(directory, test_files)
 
-    use fortun_utils, only : extend, CHAR_LENGTH
+    use fortun_utils, only : extend, CHAR_LENGTH, number_of_lines
 
     implicit none 
 
@@ -88,37 +86,5 @@ contains
     
 
   end subroutine find_tests
-
-
-
-  !-------------------------------------------------------------- number_of_lines
-  !> counts the number of lines in a file
-  !! inspired from FortranWiki
-  integer function number_of_lines(input_file) result(lines)
-    
-    use iso_fortran_env, only : iostat_end
-
-    implicit none 
-
-    character(len=*), intent(IN) :: input_file
-
-    integer, parameter :: io = 15
-    integer :: stat
-    character(len=100) :: buffer
-        
-    lines = 0
-    open(io, file=trim(input_file), form="formatted")
-    do  
-       read(io, fmt=*, iostat=stat) buffer
-       if (stat .eq. iostat_end) exit
-       lines = lines + 1
-    end do
-    close(io)
-
-  end function number_of_lines
-
-  
-
-
 
 end module fortun_generate
