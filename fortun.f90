@@ -21,9 +21,6 @@ program fortun
   !-- generation of test executable
   call generate()
 
-  ! link to the main test executable
-
-
 
   !-- run all tests
   ! call system("./fortun_test", stat)    !< only for linux now, should provide a better way
