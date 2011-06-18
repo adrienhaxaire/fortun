@@ -1,7 +1,7 @@
 
 FC := gfortran
 
-FF := -Wall -g 
+FF := -Wall -g -fbounds-check
 
 OBJ := fortun_utils.o fortun_generate.o
 
