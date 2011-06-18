@@ -113,11 +113,11 @@ contains
     character(len=*), intent(IN) :: file
     character(len=*), intent(INOUT) :: extension
 
-    integer :: pos
+    integer :: position
 
-    do pos=len(trim(file)),1,-1
-       if (file(pos:pos).eq.".") then
-          extension = file((pos+1):len(file))
+    do position=len(trim(file)),1,-1
+       if (file(position:position).eq.".") then
+          extension = file((position+1):len(file))
        endif    
     end do
 
