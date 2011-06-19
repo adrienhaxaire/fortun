@@ -1,3 +1,4 @@
+
 !--------------------------------------------------------------------------------
 !
 !> Generate the tests: lists and compiles them
@@ -14,17 +15,19 @@ module fortun_generate
 contains
 
   !--------------------------------------------------------------------- generate
-  subroutine generate()
+  subroutine generate(directory)
 
     use fortun_utils, only : CHAR_LENGTH
     use fortun_find_tests, only : find_tests
 
     implicit none 
   
+    character(len=*), intent(IN) :: directory
+
     character(CHAR_LENGTH), dimension(:), allocatable :: test_files
     integer :: i
 
-    call find_tests(".",test_files)
+    call find_tests(trim(directory),test_files)
 
     ! compile them
     do i=1,size(test_files)

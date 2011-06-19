@@ -9,21 +9,23 @@
 
 program fortun
 
-  use fortun_input, only : check_arguments
+  use fortun_input, only : check_arguments, get_cwd
   use fortun_generate, only : generate
 
   implicit none 
 
+  character(len=1024) :: cwd  !< current working directory
+
   !-- process input: command line arguments, etc
   if (.not.check_arguments()) then 
      ! todo: display help/usage 
-     print *, "wrong number of arguments"
+     print *, "pb arguments"
      stop
   end if
-
-
+  
   !-- generation of test executable
-  call generate()
+  call get_cwd(cwd)
+  call generate(trim(cwd))
 
 
   !-- run all tests
