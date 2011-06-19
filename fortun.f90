@@ -9,14 +9,18 @@
 
 program fortun
 
+  use fortun_input, only : check_arguments
   use fortun_generate, only : generate
 
   implicit none 
 
-  !-- compilation of new tests
-  ! check for added/modified tests with timestamp difference
-  ! check dependencies
-  ! compile them
+  !-- process input: command line arguments, etc
+  if (.not.check_arguments()) then 
+     ! todo: display help/usage 
+     print *, "wrong number of arguments"
+     stop
+  end if
+
 
   !-- generation of test executable
   call generate()

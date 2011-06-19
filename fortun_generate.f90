@@ -22,14 +22,21 @@ contains
     implicit none 
   
     character(CHAR_LENGTH), dimension(:), allocatable :: test_files
+    integer :: i
 
     call find_tests(".",test_files)
 
     ! compile them
+    do i=1,size(test_files)
+       call system("gfortran -c "//trim(test_files(i)))
+    end do
 
     ! link with the tested subroutines to have a sub-executable
-
+    ! -> find these subroutines 
     
+
+
+
 
   end subroutine generate
 
