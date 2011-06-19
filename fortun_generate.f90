@@ -15,32 +15,25 @@ module fortun_generate
 contains
 
   !--------------------------------------------------------------------- generate
-  subroutine generate(directory)
+  subroutine generate(test_dir, src_dir)
 
     use fortun_utils, only : CHAR_LENGTH
     use fortun_find_tests, only : find_tests
+    use fortun_find_sources, only : find_sources
 
     implicit none 
   
-    character(len=*), intent(IN) :: directory
+    character(len=*), intent(IN) :: test_dir
+    character(len=*), intent(IN) :: src_dir
 
     character(CHAR_LENGTH), dimension(:), allocatable :: test_files
-    integer :: i
+    character(CHAR_LENGTH), dimension(:), allocatable :: source_files
 
-    call find_tests(trim(directory),test_files)
+    call find_tests(trim(test_dir), test_files)
 
-    ! compile them
-    do i=1,size(test_files)
-       call system("gfortran -c "//trim(test_files(i)))
-    end do
+    call find_sources(trim(src_dir), source_files)
 
-    ! link with the tested subroutines to have a sub-executable
-    ! -> find these subroutines 
     
-
-
-
-
   end subroutine generate
 
 
