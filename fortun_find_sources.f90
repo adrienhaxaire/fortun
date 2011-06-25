@@ -9,10 +9,14 @@ module fortun_find_sources
 contains
 
   !-------------------------------------------------------------- find_procedures
+  !> supposing sources are in the default directory. 
+  !! if not, must be specified via the option -s, or --source
+  !!
+  !! open the test find and find calls to source procedures
+  !
   subroutine find_sources(directory, source_files)
-
     
-    use fortun_utils, only : extend, CHAR_LENGTH, number_of_lines, check_allocation
+    use fortun_utils, only : CHAR_LENGTH, check_allocation
 
     implicit none 
 
@@ -22,15 +26,14 @@ contains
     
     character(len=*), intent(IN) :: directory
     character(len=*), dimension(:), allocatable, intent(INOUT) :: source_files
+    
+    integer :: error
 
+    allocate(source_files(1), stat=error) 
+    call check_allocation(error, "'source_files' in find_sources")
 
+    source_files(1) = trim(directory) // "example/myadd.f90"
 
   end subroutine find_sources
-
-
-  
-
-
-
 
 end module fortun_find_sources

@@ -14,7 +14,8 @@ module fortun_find_tests
 contains
 
   !------------------------------------------------------------------- find_tests
-  !> find the files which have a name starting with 'test_'
+  !> find the files which have a name starting with 'test_'.
+  !! can be specified with the option -t or --test
   recursive subroutine find_tests(directory, test_files)
 
     use fortun_utils, only : extend, CHAR_LENGTH, number_of_lines, check_allocation
