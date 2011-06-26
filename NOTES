@@ -1,2 +1,8 @@
 TEST COMPILATION
 should have a dir to find object files + mod files
+compiler options should be customizable
+find procedures to call when creating test executable
+
+TEST LOG
+write the log
+allow spotting of the error, like "expected sth got else"
