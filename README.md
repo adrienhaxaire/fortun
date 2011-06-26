@@ -3,6 +3,7 @@ I work on this project during my spare time. It is therefore not related at all 
 
 ##DESCRIPTION
 **fortun** is a unit test framework for Fortran.
+There is no official release at the moment as it is not finished yet, even for a 0.1 release.
 
 ##LICENSE
 The license is GPL3, as mentionned in the LICENSE file.
