@@ -29,7 +29,7 @@ program fortun
   
   !-- run all tests
   test_cmd = "./fortun_test"    !< only for linux now, should provide a better way
-  !call system(trim(cmd), stat)   
+  call system(trim(test_cmd))   
 
 
   !-- display results
