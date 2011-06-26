@@ -25,7 +25,7 @@ program fortun
   
   !-- generation of test executable
   call get_cwd(cwd)
-  call generate(trim(cwd), "example")
+  call generate(trim(cwd), trim(cwd))
   
   !-- run all tests
   test_cmd = "./fortun_test"    !< only for linux now, should provide a better way
