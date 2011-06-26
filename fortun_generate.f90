@@ -18,7 +18,7 @@ contains
 
     use fortun_utils, only : CHAR_LENGTH
     use fortun_find, only : find_tests, find_sources
-    use fortun_compile_tests, only : compile_tests
+    use fortun_compile, only : compile_tests, compile_sources
  
     implicit none 
   
@@ -34,6 +34,7 @@ contains
 
     call compile_tests(test_files)
 
+    call compile_sources(source_files)
     
   end subroutine generate
 

@@ -5,7 +5,7 @@ FF := -Wall -g -fbounds-check
 
 OBJ := fortun_assertions.o fortun_utils.o fortun_find_tests.o\
 	fortun_input.o fortun_find_sources.o fortun_find.o\
-	fortun_compile_tests.o fortun_generate.o
+	fortun_compile.o fortun_generate.o
 
 fortun: $(OBJ) fortun.f90
 	$(FC) $(FF) $(OBJ) fortun.f90 -o fortun

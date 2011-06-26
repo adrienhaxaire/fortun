@@ -32,7 +32,7 @@ contains
     allocate(source_files(1), stat=error) 
     call check_allocation(error, "'source_files' in find_sources")
 
-    source_files(1) = trim(directory) // "example/myadd.f90"
+    source_files(1) = trim(directory) // "/example/myadd.f90"
 
   end subroutine find_sources
 
