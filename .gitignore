@@ -1,4 +1,8 @@
 *.o
 *.mod
 *~
-
+#*
+.#*
+fortun
+fortun_test
+fortun_test.f90
